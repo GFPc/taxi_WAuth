@@ -32,7 +32,7 @@ module.exports = function (app, client) {
   });
   app.post("/send-message", verifyKey, async (req, res) => {
     console.log(req.body,req.headers)
-    const message = req.body["message"];
+    const message = req.body["code"];
     const ids = req.body["phone"];
     console.log(message,ids)
     if (message.length === 0 || !ids || ids.length === 0) {
