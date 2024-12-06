@@ -1,8 +1,6 @@
 require('dotenv').config();
 function verifyKey(req, res, next) {
     const apiKey = req.headers['x-api-key'];
-    console.log("RECEIVED API KEY: " + apiKey);
-    console.log("BASE64 DECODED API KEY: " + Buffer.from(apiKey, 'base64').toString("hex"));
     const validApiKey = process.env.API_KEY;
 
     if (!apiKey || apiKey !== validApiKey) {
