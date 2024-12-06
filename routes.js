@@ -38,6 +38,7 @@ module.exports = function (app, client) {
     phone += "@c.us"
     console.log(message,phone)
     if (message.length === 0 || !phone || phone.length === 0) {
+      console.log("Bad Request: Message and IDs are required!");
       return res.status(400).send("Bad Request: Message and IDs are required!");
     }
 
@@ -46,6 +47,7 @@ module.exports = function (app, client) {
       const names = await getChatName(client, [ids]);
       res.send(`Pesan berhasil dikirim ke ${names.join(", ")}!`);
     } catch (error) {
+      console.log(error);
       res.status(500).send(`Failed to send message: ${error}`);
     }
   })
