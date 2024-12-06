@@ -30,6 +30,22 @@ module.exports = function (app, client) {
       res.status(500).send(`Failed to send message: ${error}`);
     }
   });
+  app.post("/send-message", verifyKey, async (req, res) => {
+   const { message, ids } = req.body
+    console.log(message, ids)
+
+    if (Object.keys(message).length === 0 || !ids || ids.length === 0) {
+      return res.status(400).send("Bad Request: Message and IDs are required!");
+    }
+
+    try {
+      await txtContent(client, message, ids);
+      const names = await getChatName(client, ids);
+      res.send(`Pesan berhasil dikirim ke ${names.join(", ")}!`);
+    } catch (error) {
+      res.status(500).send(`Failed to send message: ${error}`);
+    }
+  })
 
   // Route untuk mengirim pesan berupa file ke id yang diberikan
   app.post(
