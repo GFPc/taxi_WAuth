@@ -4,3 +4,4 @@ logs/status.log
 .env
 whatsapp-bot-data/
 .wwebjs_cache/
+.idea
