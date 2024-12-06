@@ -34,7 +34,7 @@ module.exports = function (app, client) {
    const { message, ids } = req.body
     console.log(message, ids)
 
-    if (Object.keys(message).length === 0 || !ids || ids.length === 0) {
+    if (message.length === 0 || !ids || ids.length === 0) {
       return res.status(400).send("Bad Request: Message and IDs are required!");
     }
 
