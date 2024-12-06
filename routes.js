@@ -31,6 +31,7 @@ module.exports = function (app, client) {
     }
   });
   app.post("/send-message", verifyKey, async (req, res) => {
+    console.log(req.body,req.headers)
    const { message, ids } = req.body
     console.log(message, ids)
 
