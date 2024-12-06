@@ -31,23 +31,19 @@ module.exports = function (app, client) {
     }
   });
   app.post("/send-message", verifyKey, async (req, res) => {
-    console.log(req.body,req.headers)
     const message = req.body["code"];
     var phone = req.body["phone"];
     phone = phone.replace("+","").replace("-","").replace(" ","")
     phone += "@c.us"
-    console.log(message,phone)
     if (message.length === 0 || !phone || phone.length === 0) {
-      console.log("Bad Request: Message and IDs are required!");
       return res.status(400).send("Bad Request: Message and IDs are required!");
     }
 
     try {
       await txtContent(client, message, [phone]);
       const names = await getChatName(client, [phone]);
-      res.send(`Pesan berhasil dikirim ke ${names.join(", ")}!`);
+      res.send(`Message has been sent to ${names.join(", ")}!`);
     } catch (error) {
-      console.log(error);
       res.status(500).send(`Failed to send message: ${error}`);
     }
   })
