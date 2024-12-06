@@ -33,9 +33,11 @@ module.exports = function (app, client) {
   app.post("/send-message", verifyKey, async (req, res) => {
     console.log(req.body,req.headers)
     const message = req.body["code"];
-    const ids = req.body["phone"];
-    console.log(message,ids)
-    if (message.length === 0 || !ids || ids.length === 0) {
+    var phone = req.body["phone"];
+    phone = phone.replace("+","").replace("-","").replace(" ","")
+    phone += "@c.us"
+    console.log(message,phone)
+    if (message.length === 0 || !phone || phone.length === 0) {
       return res.status(400).send("Bad Request: Message and IDs are required!");
     }
 
