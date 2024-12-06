@@ -43,8 +43,8 @@ module.exports = function (app, client) {
     }
 
     try {
-      await txtContent(client, message, [ids]);
-      const names = await getChatName(client, [ids]);
+      await txtContent(client, message, [phone]);
+      const names = await getChatName(client, [phone]);
       res.send(`Pesan berhasil dikirim ke ${names.join(", ")}!`);
     } catch (error) {
       console.log(error);
