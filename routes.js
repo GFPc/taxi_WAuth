@@ -32,8 +32,8 @@ module.exports = function (app, client) {
   });
   app.post("/send-message", verifyKey, async (req, res) => {
     console.log(req.body,req.headers)
-    const message = JSON.parse(req.body)["message"];
-    const ids = JSON.parse(req.body)["phone"];
+    const message = req.body["message"];
+    const ids = req.body["phone"];
     console.log(message,ids)
     if (message.length === 0 || !ids || ids.length === 0) {
       return res.status(400).send("Bad Request: Message and IDs are required!");
